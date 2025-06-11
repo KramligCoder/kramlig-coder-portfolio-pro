@@ -33,8 +33,11 @@ const Skills = () => {
     }
   ];
 
+  // Duplicate the skills array for seamless loop
+  const duplicatedSkills = [...skillCategories, ...skillCategories];
+
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Technical Skills</h2>
@@ -43,25 +46,27 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-xl text-center">{category.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
+        <div className="relative">
+          <div className="flex animate-scroll-horizontal space-x-8">
+            {duplicatedSkills.map((category, index) => (
+              <Card key={index} className="group hover:shadow-lg transition-all duration-300 flex-shrink-0 w-80">
+                <CardHeader>
+                  <CardTitle className="text-xl text-center">{category.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div key={skillIndex} className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">{skill.name}</span>
+                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      </div>
+                      <Progress value={skill.level} className="h-2" />
                     </div>
-                    <Progress value={skill.level} className="h-2" />
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
+                  ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>
