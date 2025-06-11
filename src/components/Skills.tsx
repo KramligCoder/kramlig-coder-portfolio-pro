@@ -58,7 +58,6 @@ const Skills = () => {
                     <div key={skillIndex} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="font-medium">{skill.name}</span>
-                        <span className="text-sm text-muted-foreground">{skill.level}%</span>
                       </div>
                       <Progress value={skill.level} className="h-2" />
                     </div>
